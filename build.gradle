@@ -7,30 +7,30 @@ sourceCompatibility = 1.7
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 ext {
-	moduleName="baas-storm";
-	moduleVersion="0.1.2-SNAPSHOT"
-	publishUserName = "runnerdev"
+    moduleName = "baas-storm";
+    moduleVersion = "0.1.2-SNAPSHOT"
+    publishUserName = "runnerdev"
     publishUserPassword = "runnerdev"
-    publishURL = "http://10.1.228.199:18081/nexus/content/repositories/snapshots/"    
+    publishURL = "http://10.1.228.199:18081/nexus/content/repositories/snapshots/"
     //mavenPublicURL = "http://10.1.228.199:18081/nexus/content/groups/public/"
-	builtBy="gradle 2.2"
+    builtBy = "gradle 2.2"
 
-    stormCoreVersion="0.9.6"
-    stormKafkaVersion="0.9.6"
-    kafkaVersion="0.8.2.1"
-    hbaseClientVersion="1.1.2"
-    gsonVersion="2.3.1"
-    commonsDBUtils="1.5"
-} 
+    stormCoreVersion = "0.9.6"
+    stormKafkaVersion = "0.9.6"
+    kafkaVersion = "0.8.2.1"
+    hbaseClientVersion = "1.1.2"
+    gsonVersion = "2.3.1"
+    commonsDBUtils = "1.5"
+}
 
 group = 'com.ai.baas.storm'
 
 
 repositories {
-    maven{ url "http://10.1.228.199:18081/nexus/content/groups/public/"  }
+    maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" }
 }
 
-dependencies{
+dependencies {
     compile 'org.apache.storm:storm-core:' + stormCoreVersion
     compile 'org.apache.storm:storm-kafka:' + stormKafkaVersion
     compile 'org.apache.kafka:kafka_2.10:' + kafkaVersion
@@ -41,60 +41,73 @@ dependencies{
 
 sourceSets {
     main {
-        java { srcDirs = ['src/main/java']}
-        resources { srcDirs = ['src/main/resources']}
+        java { srcDirs = ['src/main/java'] }
+        resources { srcDirs = ['src/main/resources'] }
     }
     test {
-        java { srcDirs = ['src/test/java']}
-        resources { srcDirs = ['src/test/resources']}
+        java { srcDirs = ['src/test/java'] }
+        resources { srcDirs = ['src/test/resources'] }
     }
 }
 
-jar{
-	include "com/ai/baas/storm/*/**"
+jar {
+    include "com/ai/baas/storm/*/**"
 }
 
 publishing {
     publications {
-       publishing.publications.create("${moduleName}", MavenPublication) {
+        publishing.publications.create("${moduleName}", MavenPublication) {
             groupId group
             artifactId moduleName
             version moduleVersion
-            artifact  jar
+            artifact jar
             pom.withXml {
-	            asNode().children().last() + {
-	                delegate.dependencies {
+                asNode().children().last() + {
+                    delegate.dependencies {
+                        delegate.dependency {
                             delegate.groupId("org.apache.storm")
                             delegate.artifactId("storm-core")
                             delegate.version(stormCoreVersion)
 
+
+                        }
+                        delegate.dependency {
                             delegate.groupId("org.apache.storm")
                             delegate.artifactId("storm-kafka")
                             delegate.version(stormKafkaVersion)
-
+                        }
+                        delegate.dependency {
                             delegate.groupId("org.apache.kafka")
                             delegate.artifactId("kafka_2.10")
                             delegate.version(kafkaVersion)
+                        }
 
+                        delegate.dependency {
                             delegate.groupId("org.apache.hbase")
                             delegate.artifactId("hbase-client")
                             delegate.version(hbaseClientVersion)
+                        }
 
+                        delegate.dependency {
                             delegate.groupId("com.google.code.gson")
                             delegate.artifactId("gson")
                             delegate.version(gsonVersion)
+                        }
 
+                        delegate.dependency {
                             delegate.groupId("commons-dbutils")
                             delegate.artifactId("commons-dbutils")
                             delegate.version(commonsDBUtils)
-	                }
-	            }
-	        }
+                        }
+
+                    }
+                }
+            }
         }
     }
     repositories {
         maven {
-            url  publishURL
+            url publishURL
             credentials {
                 username = publishUserName
                 password = publishUserPassword
