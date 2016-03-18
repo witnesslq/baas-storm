@@ -14,6 +14,13 @@ ext {
     publishURL = "http://10.1.228.199:18081/nexus/content/repositories/snapshots/"    
     //mavenPublicURL = "http://10.1.228.199:18081/nexus/content/groups/public/"
 	builtBy="gradle 2.2"
+
+    stormCoreVersion="0.9.6"
+    stormKafkaVersion="0.9.6"
+    kafkaVersion="0.8.2.1"
+    hbaseClientVersion="1.1.2"
+    gsonVersion="2.3.1"
+    commonsDBUtils="1.5"
 } 
 
 group = 'com.ai.baas.storm'
@@ -24,12 +31,12 @@ repositories {
 }
 
 dependencies{
-    compile 'org.apache.storm:storm-core:0.9.6'
-    compile 'org.apache.storm:storm-kafka:0.9.6'
-    compile 'org.apache.kafka:kafka_2.10:0.8.2.1'
-    compile 'org.apache.hbase:hbase-client:1.1.2'
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'commons-dbutils:commons-dbutils:1.5'
+    compile 'org.apache.storm:storm-core:${stormCoreVersion}'
+    compile 'org.apache.storm:storm-kafka:${stormKafkaVersion}'
+    compile 'org.apache.kafka:kafka_2.10:${kafkaVersion}'
+    compile 'org.apache.hbase:hbase-client:${hbaseClientVersion}'
+    compile 'com.google.code.gson:gson:${gsonVersion}'
+    compile 'commons-dbutils:commons-dbutils:${commonsDBUtils}'
 }
 
 sourceSets {
@@ -57,6 +64,29 @@ publishing {
             pom.withXml {
 	            asNode().children().last() + {
 	                delegate.dependencies {
+                            delegate.groupId("org.apache.storm")
+                            delegate.artifactId("storm-core")
+                            delegate.version(stormCoreVersion)
+
+                            delegate.groupId("org.apache.storm")
+                            delegate.artifactId("storm-kafka")
+                            delegate.version(stormKafkaVersion)
+
+                            delegate.groupId("org.apache.kafka")
+                            delegate.artifactId("kafka_2.10")
+                            delegate.version(kafkaVersion)
+
+                            delegate.groupId("org.apache.hbase")
+                            delegate.artifactId("hbase-client")
+                            delegate.version(hbaseClientVersion)
+
+                            delegate.groupId("com.google.code.gson")
+                            delegate.artifactId("gson")
+                            delegate.version(gsonVersion)
+
+                            delegate.groupId("commons-dbutils")
+                            delegate.artifactId("commons-dbutils")
+                            delegate.version(commonsDBUtils)
 	                }
 	            }
 	        }
