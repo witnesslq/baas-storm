@@ -47,7 +47,7 @@ public class LoadConfig {
 	 *            exception
 	 * @return
 	 */
-	public static Map<String,String> findAndReadYaml(String name, boolean mustExist,
+	public static Map<String,Object> findAndReadYaml(String name, boolean mustExist,
 			boolean canMultiple) {
 		InputStream in = null;
 		boolean confFileEmpty = false;
@@ -55,9 +55,9 @@ public class LoadConfig {
 			in = getConfigFileInputStream(name, canMultiple);
 			if (null != in) {
 				Yaml yaml = new Yaml(new SafeConstructor());
-				Map<String,String> ret = (Map<String,String>) yaml.load(new InputStreamReader(in));
+				Map<String,Object> ret = (Map<String,Object>) yaml.load(new InputStreamReader(in));
 				if (null != ret) {
-					return new HashMap<String,String>(ret);
+					return new HashMap<String,Object>(ret);
 				} else {
 					confFileEmpty = true;
 				}
@@ -71,7 +71,7 @@ public class LoadConfig {
 					throw new RuntimeException(
 							"Could not find config file on classpath " + name);
 			} else {
-				return new HashMap<String,String>();
+				return new HashMap<String,Object>();
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -118,7 +118,7 @@ public class LoadConfig {
 //		return getConfigFileInputStream(configFilePath, true);
 //	}
 
-	public static Map<String,String> loadYaml(String confPath) {
+	public static Map<String,Object> loadYaml(String confPath) {
 		return findAndReadYaml(confPath, true, true);
 	}
 

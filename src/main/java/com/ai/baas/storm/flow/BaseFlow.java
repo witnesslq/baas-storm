@@ -22,14 +22,14 @@ import com.ai.baas.storm.util.LoadConfig;
 public abstract class BaseFlow {
 
 	private static Logger logger = LoggerFactory.getLogger(BaseFlow.class);
-	protected Map<String, String> conf = new HashMap<String, String>();
+	protected Map<String, Object> conf = new HashMap<String, Object>();
 	protected String topologyName;
 	protected TopologyBuilder builder;
 	
 	private void loadConf(String path){
 		if (path.endsWith("yaml")){
 			conf = LoadConfig.loadYaml(path);
-			topologyName = conf.get(BaseConstants.TOPOLOGY_NAME);
+			topologyName = (String)conf.get(BaseConstants.TOPOLOGY_NAME);
 		}else{
 			exit("Load Yaml config failure");
 		}
@@ -118,7 +118,7 @@ public abstract class BaseFlow {
 	 * @return
 	 */
 	public int getParallelNum(String param, int defaultNum){
-		String str = conf.get(BaseConstants.TOPOLOGY_SPOUT_PARALLEL);
+		String str = (String)conf.get(BaseConstants.TOPOLOGY_SPOUT_PARALLEL);
 		if (StringUtils.isEmpty(str)) {
 			logger.warn(param + " is not set , use default " + defaultNum);
 			return defaultNum;
