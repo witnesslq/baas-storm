@@ -58,6 +58,10 @@ public class MessageParser {
 		}
 	}
 	
+	public Map<String, String> getData() {
+		return data;
+	}
+	
 	public List<Object> toTupleData(){
 		//String[] outputKeys = boltInOutKeys.get(1);
 		List<Object> rtnValue = new ArrayList<Object>();
