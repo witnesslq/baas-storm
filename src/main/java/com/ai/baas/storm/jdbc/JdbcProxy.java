@@ -22,7 +22,7 @@ public class JdbcProxy {
     private static Logger logger = LoggerFactory.getLogger(JdbcProxy.class);
     private static Map<String, Connector> connectors = new HashMap<String, Connector>();
 
-    public static void loadResource(List<String> dbNames, Map<String, String> config) {
+    public static void loadResources(List<String> dbNames, Map<String, String> config) {
         Connector connector = null;
         for (String dbName : dbNames) {
             String jsonJdbcParam = config.get(dbName);
