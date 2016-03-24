@@ -17,6 +17,8 @@ public class BaseConstants {
 	
 	public static final String SERVICE_ID = "service_id";
 	public static final String TENANT_ID = "tenant_id";
+	public static final String ACC_MONTH = "acc_month";
+	public static final String START_TIME  = "start_time";
 	public static final String SOURCE = "source";
 	public static final String BATCH_SERIAL_NUMBER = "bsn";
 	public static final String SERIAL_NUMBER = "sn";
