@@ -38,7 +38,7 @@ public class DuplicateCheckingConfig {
 	
 	private static void loadData() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("eselect t.tenant_id tenantId,t.service_id serviceId,t.source sourc,");
+		sql.append("select t.tenant_id tenantId,t.service_id serviceId,t.source source,");
 		sql.append("t.dup_key dupKey,t.tb_suffix_key tbSuffixKey ");
 		sql.append("from bmc_dataquality t");
 		List<DuplicateChecking> duplicateCheckings = JdbcTemplate.query(sql.toString(), BaseConstants.JDBC_DEFAULT, new BeanListHandler<DuplicateChecking>(DuplicateChecking.class));
