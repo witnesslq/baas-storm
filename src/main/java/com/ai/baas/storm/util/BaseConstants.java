@@ -35,4 +35,7 @@ public class BaseConstants {
 	public static final String COMMON_HYPHEN = "-";
 	
 	
+	public static final String FAILURE_BILL_TABLE_NAME ="bmc_failure_bill";
+	public static final String FAILURE_BILL_FAMILY_NAME ="failure_bill";
+	
 }
