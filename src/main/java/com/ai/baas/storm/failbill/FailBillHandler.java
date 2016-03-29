@@ -1,6 +1,7 @@
 package com.ai.baas.storm.failbill;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -100,6 +101,34 @@ public class FailBillHandler extends LoopThread {
 		
 		msgQueue.add(failureBill);
 	}
+	
+	/**
+	 * 插入错单数据到队列
+	 * @param original
+	 * @param failStep
+	 * @param failCode
+	 * @param failReason
+	 */
+	public static void addFailBillMsg(String original,String failStep,String failCode,String failReason){
+		if(StringUtils.isBlank(original)){
+			return;
+		}
+		String[] inputs = StringUtils.splitPreserveAllTokens(original,BaseConstants.FIELD_SPLIT);
+		FailureBill failureBill = new FailureBill();
+		failureBill.setTenantId(inputs[0]);
+		failureBill.setServiceId(inputs[1]);
+		failureBill.setSource(inputs[2]);
+		failureBill.setBsn(inputs[3]);
+		failureBill.setSn(inputs[4]);
+		failureBill.setFailStep(StringUtils.defaultString(failStep));
+		failureBill.setFailCode(StringUtils.defaultString(failCode));
+		failureBill.setFailDate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
+		failureBill.setFailReason(failReason);
+		failureBill.setFailPakcet(original);
+		
+		msgQueue.add(failureBill);
+	}
+	
 	
 	
 }
