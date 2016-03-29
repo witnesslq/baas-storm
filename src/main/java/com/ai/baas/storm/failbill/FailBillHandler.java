@@ -1,11 +1,16 @@
 package com.ai.baas.storm.failbill;
 
+import java.util.Date;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ai.baas.storm.util.BaseConstants;
 import com.ai.baas.storm.util.LoopThread;
 
 /**
@@ -69,5 +74,32 @@ public class FailBillHandler extends LoopThread {
 	public static void addFailBillMsg(FailureBill failureBill){
 		msgQueue.add(failureBill);
 	}
+	
+	/**
+	 * 插入错单数据到队列
+	 * @param data
+	 * @param failStep
+	 * @param failCode
+	 * @param failReason
+	 */
+	public static void addFailBillMsg(Map<String, String> data,String failStep,String failCode,String failReason){
+		if(data == null){
+			return;
+		}
+		FailureBill failureBill = new FailureBill();
+		failureBill.setTenantId(data.get(BaseConstants.TENANT_ID));
+		failureBill.setServiceId(data.get(BaseConstants.SERVICE_ID));
+		failureBill.setSource(data.get(BaseConstants.SOURCE));
+		failureBill.setBsn(data.get(BaseConstants.BATCH_SERIAL_NUMBER));
+		failureBill.setSn(data.get(BaseConstants.SERIAL_NUMBER));
+		failureBill.setFailStep(StringUtils.defaultString(failStep));
+		failureBill.setFailCode(StringUtils.defaultString(failCode));
+		failureBill.setFailDate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
+		failureBill.setFailReason(failReason);
+		failureBill.setFailPakcet(data.toString());
+		
+		msgQueue.add(failureBill);
+	}
+	
 	
 }
