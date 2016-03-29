@@ -10,6 +10,8 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ai.baas.storm.util.BaseConstants;
+
 /**
  * Jdbc模板类,封装jdbc增删改查操作
  * @author majun
@@ -86,6 +88,16 @@ public class JdbcTemplate {
 			logger.error("error",e);
 		}
 		return result;
+	}
+	
+	/**
+	 * 使用默认的jdbc查询
+	 * @param sql
+	 * @param rsh
+	 * @return
+	 */
+	public static <T> List<T> defaultQuery(String sql, ResultSetHandler<List<T>> rsh) {
+		return query(sql,BaseConstants.JDBC_DEFAULT,rsh);
 	}
 	
 	
