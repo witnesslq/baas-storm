@@ -21,10 +21,13 @@ public class KafkaSpoutAgent {
 		String zkServerStr = String.valueOf(conf.get(BaseConstants.KAFKA_SPOUT_ZK_SERVER));
 		int zkPort = Integer.parseInt((String) conf.get(BaseConstants.KAFKA_SPOUT_ZK_PORT));
 		String zkAddr = String.valueOf(conf.get(BaseConstants.KAFKA_SPOUT_CONSUMER_ADDR));
-		String id = String.valueOf(conf.get(BaseConstants.TOPOLOGY_NAME));
+		StringBuilder id = new StringBuilder();
+		id.append(String.valueOf(conf.get(BaseConstants.TOPOLOGY_NAME)));
+		id.append(BaseConstants.COMMON_JOINER);
+		id.append(topic);
 		BrokerHosts brokerHosts = new ZkHosts(zkAddr);
 		//SpoutConfig spoutConf = new SpoutConfig(brokerHosts, topic, "/kafkainput", UUID.randomUUID().toString());
-		SpoutConfig spoutConf = new SpoutConfig(brokerHosts, topic, "/kafkainput", id);
+		SpoutConfig spoutConf = new SpoutConfig(brokerHosts, topic, "/kafkainput", id.toString());
 		spoutConf.scheme = new SchemeAsMultiScheme(new StringScheme());
 		spoutConf.forceFromStart = false;
 
