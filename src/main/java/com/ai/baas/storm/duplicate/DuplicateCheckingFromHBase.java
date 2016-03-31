@@ -41,15 +41,14 @@ public class DuplicateCheckingFromHBase implements IDuplicateChecking {
 		String dupKeyStr = assembleDuplicateKey(dupKey.toString(),data);
 		return checkDuplicate(dupTableName, dupKeyStr);
 	}
-	
+
 	/**
 	 * 组装查重的表名
-	 * @param cacheDupKey
-	 * @param header
-	 * @param businessData
+	 * @param dupKey
+	 * @param data
 	 * @return
-	 * @throws BmcException
-	 */
+	 * @throws Exception
+     */
 	private String assembleDupTable(String dupKey,Map<String,String> data) throws Exception{
 		String suffixKey = DuplicateCheckingConfig.getInstance().getTbSuffixKey(dupKey);
 		String suffixKeyValue = data.get(suffixKey);
@@ -66,7 +65,6 @@ public class DuplicateCheckingFromHBase implements IDuplicateChecking {
 	/**
 	 * 组装查重的关键字
 	 * @param cacheDupKey
-	 * @param header
 	 * @param businessData
 	 * @return
 	 */
