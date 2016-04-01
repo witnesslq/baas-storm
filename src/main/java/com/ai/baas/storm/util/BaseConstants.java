@@ -26,6 +26,8 @@ public class BaseConstants {
 	public static final String ARRIVAL_TIME = "arrival_time";
 	public static final String RECORD_DATA = "data";
 	public static final String SUBS_ID = "subs_id";
+	public static final String CUST_ID = "cust_id";
+	public static final String ACCT_ID = "acct_id";
 	
 	public static final String JDBC_DEFAULT = "jdbc.default";
 	public static final String HBASE_PARAM = "hbase.param";
@@ -33,7 +35,7 @@ public class BaseConstants {
 	public static final String COMMON_SPLIT = ",";
 	public static final String COMMON_JOINER = "_";
 	public static final String COMMON_HYPHEN = "-";
-	
+	public static final String CACHE_RECORD_SPLIT = "#";
 	
 	public static final String FAILURE_BILL_TABLE_NAME ="bmc_failure_bill";
 	public static final String FAILURE_BILL_FAMILY_NAME ="failure_bill";
