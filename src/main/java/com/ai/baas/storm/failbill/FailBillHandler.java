@@ -1,7 +1,6 @@
 package com.ai.baas.storm.failbill;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -13,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.ai.baas.storm.util.BaseConstants;
 import com.ai.baas.storm.util.LoopThread;
+import com.google.gson.Gson;
 
 /**
  * 错单处理器
@@ -37,6 +37,7 @@ public class FailBillHandler extends LoopThread {
 				if(failBillHandler == null){
 					failBillHandler = new FailBillHandler();
 					failBillHandler.start();
+					System.out.println("错单处理器启动中...");
 					logger.debug("错单处理器启动中...");
 				}
 			}
@@ -97,8 +98,8 @@ public class FailBillHandler extends LoopThread {
 		failureBill.setFailCode(StringUtils.defaultString(failCode));
 		failureBill.setFailDate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
 		failureBill.setFailReason(failReason);
-		failureBill.setFailPakcet(data.toString());
-		
+		Gson gson = new Gson();
+		failureBill.setFailPakcet(gson.toJson(data));
 		msgQueue.add(failureBill);
 	}
 	
