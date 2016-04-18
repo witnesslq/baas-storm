@@ -56,6 +56,9 @@ public class MessageParser {
 	private void init() throws Exception{
 		recordFmtKey = new RecordFmtKey(data.get(BaseConstants.TENANT_ID),data.get(BaseConstants.SERVICE_ID),data.get(BaseConstants.SOURCE));
 		Map<String, Integer> inputMappingRule = mappingRules[0].getIndexes(recordFmtKey);
+		if (inputMappingRule == null) {
+			throw new Exception("bmc_record_fmt表中没有配置报文格式!");
+		}
 		for (Entry<String, Integer> entry : inputMappingRule.entrySet()) {
 			data.put(entry.getKey(), inputDatas[entry.getValue()]);
 		}
