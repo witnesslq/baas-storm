@@ -116,11 +116,13 @@ public class FailBillHandler extends LoopThread {
 		}
 		String[] inputs = StringUtils.splitPreserveAllTokens(original,BaseConstants.FIELD_SPLIT);
 		FailureBill failureBill = new FailureBill();
-		failureBill.setTenantId(inputs[0]);
-		failureBill.setServiceId(inputs[1]);
-		failureBill.setSource(inputs[2]);
-		failureBill.setBsn(inputs[3]);
-		failureBill.setSn(inputs[4]);
+		if (inputs.length >= 5) {
+			failureBill.setTenantId(inputs[0]);
+			failureBill.setServiceId(inputs[1]);
+			failureBill.setSource(inputs[2]);
+			failureBill.setBsn(inputs[3]);
+			failureBill.setSn(inputs[4]);
+		}
 		failureBill.setFailStep(StringUtils.defaultString(failStep));
 		failureBill.setFailCode(StringUtils.defaultString(failCode));
 		failureBill.setFailDate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));

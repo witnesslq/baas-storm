@@ -37,8 +37,11 @@ public class MessageParser {
 				BaseConstants.ARRIVAL_TIME, BaseConstants.ACCOUNT_PERIOD };
 	}
 	
-	private MessageParser(String original, MappingRule[] mappingRules, String[] outputKeys){
+	private MessageParser(String original, MappingRule[] mappingRules, String[] outputKeys) throws Exception{
 		String[] inputParams = StringUtils.splitPreserveAllTokens(original,BaseConstants.FIELD_SPLIT);
+		if (inputParams.length < 7) {
+			throw new Exception("不正确的数据格式!"); 
+		}
 		for(int i=0;i<headerKeys.length;i++){
 			data.put(headerKeys[i], inputParams[i]);
 		}
