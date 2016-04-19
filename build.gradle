@@ -31,12 +31,15 @@ repositories {
 }
 
 dependencies {
+    
+    compile 'com.google.code.gson:gson:' + gsonVersion
+    compile 'com.zaxxer:HikariCP:2.4.0'
+    compile 'commons-dbutils:commons-dbutils:' + commonsDBUtils
+    compile 'net.sf.json-lib:json-lib:2.4:jdk15'
     compile 'org.apache.storm:storm-core:' + stormCoreVersion
     compile 'org.apache.storm:storm-kafka:' + stormKafkaVersion
     compile 'org.apache.kafka:kafka_2.10:' + kafkaVersion
     compile 'org.apache.hbase:hbase-client:' + hbaseClientVersion
-    compile 'com.google.code.gson:gson:' + gsonVersion
-    compile 'commons-dbutils:commons-dbutils:' + commonsDBUtils
 }
 
 sourceSets {
