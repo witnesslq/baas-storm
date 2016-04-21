@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
  */
 public class DuplicateCheckingFromHBase implements IDuplicateChecking {
     private static Logger logger = LoggerFactory.getLogger(DuplicateCheckingFromHBase.class);
-    private Connection conn = HBaseProxy.getConnection();
+    //private Connection conn = HBaseProxy.getConnection();
 
     @Override
     public boolean checkData(Map<String, String> data) throws Exception {
@@ -90,7 +90,7 @@ public class DuplicateCheckingFromHBase implements IDuplicateChecking {
         byte[] rowKey = dupKey.getBytes();
         Table table = null;
         try {
-            table = conn.getTable(TableName.valueOf(dupTableName));
+            table = HBaseProxy.getConnection().getTable(TableName.valueOf(dupTableName));
             Get get = new Get(rowKey);
             Result result = table.get(get);
             if (result.isEmpty()) {
@@ -117,7 +117,7 @@ public class DuplicateCheckingFromHBase implements IDuplicateChecking {
 
 
     private void createHBaseTableIfNecessary(String tableName) throws IOException {
-        Admin admin = conn.getAdmin();
+        Admin admin = HBaseProxy.getConnection().getAdmin();
         if (!admin.isTableAvailable(TableName
                 .valueOf(tableName))) {
             HTableDescriptor tableDesc = new HTableDescriptor(

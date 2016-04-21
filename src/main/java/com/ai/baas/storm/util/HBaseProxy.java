@@ -18,8 +18,21 @@ import com.google.gson.JsonParser;
 public class HBaseProxy {
 	private static Logger logger = LoggerFactory.getLogger(HBaseProxy.class);
 	private static Connection connection;
+	private static HBaseProxy instance;
 	
 	public static void loadResource(Map<String,String> config){
+		if(instance == null){
+			synchronized(HBaseProxy.class){
+				if(instance == null){
+					instance = new HBaseProxy();
+					instance.loading(config);
+					System.out.println("hbase客户端连接成功...");
+				}
+			}
+		}
+	}
+	
+	public void loading(Map<String,String> config){
 		Configuration configuration = HBaseConfiguration.create();
 		String hbaseSite = config.get(BaseConstants.HBASE_PARAM);
 		try {

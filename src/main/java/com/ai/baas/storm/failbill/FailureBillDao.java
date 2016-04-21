@@ -21,7 +21,7 @@ import com.ai.baas.storm.util.HBaseProxy;
  */
 public class FailureBillDao {
 	private static Logger logger = LoggerFactory.getLogger(FailureBillDao.class);
-	private Connection conn = HBaseProxy.getConnection();
+	//private Connection conn = HBaseProxy.getConnection();
 	private byte[] column_family = Bytes.toBytes(BaseConstants.FAILURE_BILL_FAMILY_NAME);
 	private TableName tableName = TableName.valueOf(BaseConstants.FAILURE_BILL_TABLE_NAME);
 	
@@ -33,7 +33,7 @@ public class FailureBillDao {
 		String rowKey = assembleRowKey(failureBill);
 		Table table=null;
 		try {
-			table = conn.getTable(tableName);
+			table = HBaseProxy.getConnection().getTable(tableName);
 			Put put = new Put(rowKey.getBytes());
 			putData(put, failureBill);
 			table.put(put);			
