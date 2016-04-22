@@ -94,6 +94,8 @@ public class FailBillHandler extends LoopThread {
 		failureBill.setSource(data.get(BaseConstants.SOURCE));
 		failureBill.setBsn(data.get(BaseConstants.BATCH_SERIAL_NUMBER));
 		failureBill.setSn(data.get(BaseConstants.SERIAL_NUMBER));
+		failureBill.setAccountPeriod(data.get(BaseConstants.ACCOUNT_PERIOD));
+		failureBill.setArrivalTime(data.get(BaseConstants.ARRIVAL_TIME));
 		failureBill.setFailStep(StringUtils.defaultString(failStep));
 		failureBill.setFailCode(StringUtils.defaultString(failCode));
 		failureBill.setFailDate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
@@ -116,12 +118,14 @@ public class FailBillHandler extends LoopThread {
 		}
 		String[] inputs = StringUtils.splitPreserveAllTokens(original,BaseConstants.FIELD_SPLIT);
 		FailureBill failureBill = new FailureBill();
-		if (inputs.length >= 5) {
+		if (inputs.length >= 7) {
 			failureBill.setTenantId(inputs[0]);
 			failureBill.setServiceId(inputs[1]);
 			failureBill.setSource(inputs[2]);
 			failureBill.setBsn(inputs[3]);
 			failureBill.setSn(inputs[4]);
+			failureBill.setAccountPeriod(inputs[5]);
+			failureBill.setArrivalTime(inputs[6]);
 		}
 		failureBill.setFailStep(StringUtils.defaultString(failStep));
 		failureBill.setFailCode(StringUtils.defaultString(failCode));
