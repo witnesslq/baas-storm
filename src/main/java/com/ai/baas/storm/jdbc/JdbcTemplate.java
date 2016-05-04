@@ -142,6 +142,24 @@ public class JdbcTemplate {
 		}
 		return result;
 	}
+	
+	/**
+	 * 手动update,需要自行commit
+	 * @param sql
+	 * @param conn
+	 * @param params
+	 * @return
+	 */
+	public static int manualUpdate(String sql, Connection conn, Object... params){
+		int result = 0;
+		QueryRunner runner = new QueryRunner();
+		try {
+			result = runner.update(conn, sql, params);
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 
 	/**
 	 * 批量操作
