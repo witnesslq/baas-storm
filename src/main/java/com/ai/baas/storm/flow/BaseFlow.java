@@ -118,7 +118,7 @@ public abstract class BaseFlow {
 	 * @return
 	 */
 	public int getParallelNum(String param, int defaultNum){
-		String str = (String)conf.get(BaseConstants.TOPOLOGY_SPOUT_PARALLEL);
+		String str = (String)conf.get(param);
 		if (StringUtils.isEmpty(str)) {
 			logger.warn(param + " is not set , use default " + defaultNum);
 			return defaultNum;
