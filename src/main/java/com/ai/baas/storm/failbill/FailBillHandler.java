@@ -90,7 +90,7 @@ public class FailBillHandler extends LoopThread {
 		}
 		FailureBill failureBill = new FailureBill();
 		failureBill.setTenantId(data.get(BaseConstants.TENANT_ID));
-		failureBill.setServiceId(data.get(BaseConstants.SERVICE_ID));
+		failureBill.setServiceType(data.get(BaseConstants.SERVICE_TYPE));
 		failureBill.setSource(data.get(BaseConstants.SOURCE));
 		failureBill.setBsn(data.get(BaseConstants.BATCH_SERIAL_NUMBER));
 		failureBill.setSn(data.get(BaseConstants.SERIAL_NUMBER));
@@ -120,7 +120,7 @@ public class FailBillHandler extends LoopThread {
 		FailureBill failureBill = new FailureBill();
 		if (inputs.length >= 7) {
 			failureBill.setTenantId(inputs[0]);
-			failureBill.setServiceId(inputs[1]);
+			failureBill.setServiceType(inputs[1]);
 			failureBill.setSource(inputs[2]);
 			failureBill.setBsn(inputs[3]);
 			failureBill.setSn(inputs[4]);

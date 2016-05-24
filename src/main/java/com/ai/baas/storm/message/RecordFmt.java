@@ -8,7 +8,7 @@ import com.ai.baas.storm.util.BaseConstants;
 public class RecordFmt {
 	private RecordFmtKey recordFmtKey;
 	private String tenantId;
-	private String serviceId;
+	private String serviceType;
 	private String source;
 	private String formatType;
 	private Integer fieldSerial;
@@ -24,12 +24,12 @@ public class RecordFmt {
 		this.tenantId = tenantId;
 	}
 
-	public String getServiceId() {
-		return serviceId;
+	public String getServiceType() {
+		return serviceType;
 	}
 
-	public void setServiceId(String serviceId) {
-		this.serviceId = serviceId;
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
 	}
 
 	public String getSource() {
@@ -82,27 +82,29 @@ public class RecordFmt {
 	
 	public static class RecordFmtKey {
 		private String tenantId;
-		private String serviceId;
+		private String serviceType;
 		private String source;
 		
-		public RecordFmtKey(String tenantId,String serviceId,String source){
+		public RecordFmtKey(String tenantId,String serviceType,String source){
 			this.tenantId = tenantId;
-			this.serviceId = serviceId;
+			this.serviceType = serviceType;
 			this.source = source;
 		}
-		
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
 			result = prime * result
-					+ ((serviceId == null) ? 0 : serviceId.hashCode());
+					+ ((serviceType == null) ? 0 : serviceType.hashCode());
 			result = prime * result
 					+ ((source == null) ? 0 : source.hashCode());
 			result = prime * result
 					+ ((tenantId == null) ? 0 : tenantId.hashCode());
 			return result;
 		}
+
+
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
@@ -112,10 +114,10 @@ public class RecordFmt {
 			if (getClass() != obj.getClass())
 				return false;
 			RecordFmtKey other = (RecordFmtKey) obj;
-			if (serviceId == null) {
-				if (other.serviceId != null)
+			if (serviceType == null) {
+				if (other.serviceType != null)
 					return false;
-			} else if (!serviceId.equals(other.serviceId))
+			} else if (!serviceType.equals(other.serviceType))
 				return false;
 			if (source == null) {
 				if (other.source != null)
@@ -129,21 +131,7 @@ public class RecordFmt {
 				return false;
 			return true;
 		}
-		
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			if(StringUtils.isNotBlank(tenantId)){
-				sb.append(tenantId).append(BaseConstants.COMMON_SPLIT);
-			}
-			if(StringUtils.isNotBlank(serviceId)){
-				sb.append(serviceId).append(BaseConstants.COMMON_SPLIT);
-			}
-			if(StringUtils.isNotBlank(source)){
-				sb.append(source).append(BaseConstants.COMMON_SPLIT);
-			}
-			return sb.substring(0, sb.length()-1).toString();
-		}
+
 
 		public String getTenantId() {
 			return tenantId;
@@ -153,12 +141,12 @@ public class RecordFmt {
 			this.tenantId = tenantId;
 		}
 
-		public String getServiceId() {
-			return serviceId;
+		public String getServiceType() {
+			return serviceType;
 		}
 
-		public void setServiceId(String serviceId) {
-			this.serviceId = serviceId;
+		public void setServiceType(String serviceType) {
+			this.serviceType = serviceType;
 		}
 
 		public String getSource() {
@@ -172,7 +160,7 @@ public class RecordFmt {
 	
 	public RecordFmtKey getRecordFmtKey(){
 		if (recordFmtKey == null){
-			recordFmtKey = new RecordFmtKey(tenantId,serviceId,source);
+			recordFmtKey = new RecordFmtKey(tenantId,serviceType,source);
 		}
 		return recordFmtKey;
 	}

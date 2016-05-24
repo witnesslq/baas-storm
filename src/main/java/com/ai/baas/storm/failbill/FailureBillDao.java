@@ -58,7 +58,7 @@ public class FailureBillDao {
 	private String assembleRowKey(FailureBill failureBill){
 		StringBuilder rowKey = new StringBuilder();
 		rowKey.append(failureBill.getTenantId()).append(BaseConstants.FIELD_SPLIT);
-		rowKey.append(failureBill.getServiceId()).append(BaseConstants.FIELD_SPLIT);
+		rowKey.append(failureBill.getServiceType()).append(BaseConstants.FIELD_SPLIT);
 		rowKey.append(failureBill.getSource()).append(BaseConstants.FIELD_SPLIT);
 		rowKey.append(failureBill.getBsn()).append(BaseConstants.FIELD_SPLIT);
 		rowKey.append(failureBill.getSn()).append(BaseConstants.FIELD_SPLIT);
@@ -75,7 +75,7 @@ public class FailureBillDao {
 	 */
 	private void putData(Put put,FailureBill failureBill){
 		put.addColumn(column_family, Bytes.toBytes("tenant_id"), toBytes(failureBill.getTenantId()));
-		put.addColumn(column_family, Bytes.toBytes("service_id"), toBytes(failureBill.getServiceId()));
+		put.addColumn(column_family, Bytes.toBytes("service_type"), toBytes(failureBill.getServiceType()));
 		put.addColumn(column_family, Bytes.toBytes("source"), toBytes(failureBill.getSource()));
 		put.addColumn(column_family, Bytes.toBytes("bsn"), toBytes(failureBill.getBsn()));
 		put.addColumn(column_family, Bytes.toBytes("sn"), toBytes(failureBill.getSn()));

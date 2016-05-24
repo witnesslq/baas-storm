@@ -6,7 +6,7 @@ public class DuplicateChecking implements Serializable {
 
 	private static final long serialVersionUID = -1050401238763087301L;
 	private String tenantId;
-	private String serviceId;
+	private String serviceType;
 	private String source;
 	private String dupKey;
 	private String tbSuffixKey;
@@ -19,12 +19,12 @@ public class DuplicateChecking implements Serializable {
 		this.tenantId = tenantId;
 	}
 
-	public String getServiceId() {
-		return serviceId;
+	public String getServiceType() {
+		return serviceType;
 	}
 
-	public void setServiceId(String serviceId) {
-		this.serviceId = serviceId;
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
 	}
 
 	public String getSource() {

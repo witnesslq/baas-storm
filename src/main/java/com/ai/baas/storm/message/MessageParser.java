@@ -32,7 +32,7 @@ public class MessageParser {
 	
 	static{
 		headerKeys = new String[] { BaseConstants.TENANT_ID,
-				BaseConstants.SERVICE_ID, BaseConstants.SOURCE,
+				BaseConstants.SERVICE_TYPE, BaseConstants.SOURCE,
 				BaseConstants.BATCH_SERIAL_NUMBER, BaseConstants.SERIAL_NUMBER,
 				BaseConstants.ARRIVAL_TIME, BaseConstants.ACCOUNT_PERIOD };
 	}
@@ -54,7 +54,7 @@ public class MessageParser {
 	}
 	
 	private void init() throws Exception{
-		recordFmtKey = new RecordFmtKey(data.get(BaseConstants.TENANT_ID),data.get(BaseConstants.SERVICE_ID),data.get(BaseConstants.SOURCE));
+		recordFmtKey = new RecordFmtKey(data.get(BaseConstants.TENANT_ID),data.get(BaseConstants.SERVICE_TYPE),data.get(BaseConstants.SOURCE));
 		Map<String, Integer> inputMappingRule = mappingRules[0].getIndexes(recordFmtKey);
 		if (inputMappingRule == null) {
 			throw new Exception("bmc_record_fmt表中没有配置报文格式!");

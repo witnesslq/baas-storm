@@ -38,7 +38,9 @@ public class DuplicateCheckingConfig {
 	
 	private static void loadData() {
 		StringBuilder sql = new StringBuilder();
-		sql.append("select t.tenant_id tenantId,t.service_id serviceId,t.source source,");
+		//603版本中去掉source
+		//sql.append("select t.tenant_id tenantId,t.service_type serviceType,t.source source,");
+		sql.append("select t.tenant_id tenantId,t.service_type serviceType,");
 		sql.append("t.dup_key dupKey,t.tb_suffix_key tbSuffixKey ");
 		sql.append("from bmc_dataquality t");
 		List<DuplicateChecking> duplicateCheckings = JdbcTemplate.query(sql.toString(), BaseConstants.JDBC_DEFAULT, new BeanListHandler<DuplicateChecking>(DuplicateChecking.class));
@@ -46,8 +48,7 @@ public class DuplicateCheckingConfig {
 		for(DuplicateChecking duplicateChecking:duplicateCheckings){
 			StringBuilder key = new StringBuilder();
 			key.append(duplicateChecking.getTenantId()).append(BaseConstants.COMMON_JOINER);
-			key.append(duplicateChecking.getServiceId()).append(BaseConstants.COMMON_JOINER);
-			key.append(duplicateChecking.getSource());
+			key.append(duplicateChecking.getServiceType());
 			dupKeys = StringUtils.splitPreserveAllTokens(duplicateChecking.getDupKey(), BaseConstants.COMMON_SPLIT);
 			for (String dupKey : dupKeys) {
 				dupKeyMap.put(key.toString(), dupKey);

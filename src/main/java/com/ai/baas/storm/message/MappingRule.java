@@ -31,7 +31,7 @@ public class MappingRule {
         logger.debug("load mapping " + formatType);
         MappingRule mappingRule = new MappingRule();
         StringBuilder recordFmtSql = new StringBuilder();
-        recordFmtSql.append("select r.tenant_id tenantId,r.service_id serviceId,r.source source,");
+        recordFmtSql.append("select r.tenant_id tenantId,r.service_type serviceType,r.source source,");
         recordFmtSql.append("       r.format_type formatType,r.field_serial fieldSerial,r.field_name fieldName,");
         recordFmtSql.append("       r.field_code fieldCode ");
         recordFmtSql.append("from bmc_record_fmt r ");

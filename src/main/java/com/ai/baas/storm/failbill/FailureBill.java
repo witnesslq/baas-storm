@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class FailureBill implements Serializable {
 	private static final long serialVersionUID = -865272664278537978L;
 	private String tenantId; //租户ID
-	private String serviceId; //业务ID
+	private String serviceType; //业务类型
 	private String source;   //数据来源 
 	private String bsn;      //批次号
 	private String sn;       //唯一标示
@@ -30,12 +30,12 @@ public class FailureBill implements Serializable {
 		this.tenantId = tenantId;
 	}
 
-	public String getServiceId() {
-		return serviceId;
+	public String getServiceType() {
+		return serviceType;
 	}
 
-	public void setServiceId(String serviceId) {
-		this.serviceId = serviceId;
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
 	}
 
 	public String getSource() {

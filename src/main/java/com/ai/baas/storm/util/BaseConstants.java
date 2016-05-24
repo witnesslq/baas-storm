@@ -15,6 +15,7 @@ public class BaseConstants {
 	public static final String FIELD_SPLIT = new String(new char[] { (char) 1 });
 	public static final String RECORD_SPLIT = new String(new char[] { (char) 2 });
 	
+	public static final String SERVICE_TYPE = "service_type";
 	public static final String SERVICE_ID = "service_id";
 	public static final String TENANT_ID = "tenant_id";
 	public static final String ACC_MONTH = "acc_month";
