@@ -32,7 +32,8 @@ public class DuplicateCheckingFromHBase implements IDuplicateChecking {
     public boolean checkData(Map<String, String> data) throws Exception {
         StringBuilder dupKey = new StringBuilder();
         dupKey.append(data.get(BaseConstants.TENANT_ID)).append(BaseConstants.COMMON_JOINER);
-        dupKey.append(data.get(BaseConstants.SERVICE_TYPE));
+        dupKey.append(data.get(BaseConstants.SERVICE_TYPE)).append(BaseConstants.COMMON_JOINER);
+        dupKey.append(DuplicateCheckingConfig.DUP_PREFIX);
         String dupTableName = assembleDupTable(dupKey.toString(), data);
         String dupKeyStr = assembleDuplicateKey(dupKey.toString(), data);
         return checkDuplicate(dupTableName, dupKeyStr);

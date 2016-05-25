@@ -19,6 +19,7 @@ import com.ai.baas.storm.util.BaseConstants;
  */
 public class DuplicateCheckingConfig {
 
+	public static final String DUP_PREFIX = "dup";
 	private static MultiValueMap dupKeyMap = new MultiValueMap();
 	private static Map<String, String> suffixKeyMap = new HashMap<String, String>();
 	private static DuplicateCheckingConfig instance = null;
@@ -48,7 +49,8 @@ public class DuplicateCheckingConfig {
 		for(DuplicateChecking duplicateChecking:duplicateCheckings){
 			StringBuilder key = new StringBuilder();
 			key.append(duplicateChecking.getTenantId()).append(BaseConstants.COMMON_JOINER);
-			key.append(duplicateChecking.getServiceType());
+			key.append(duplicateChecking.getServiceType()).append(BaseConstants.COMMON_JOINER);
+			key.append(DUP_PREFIX);
 			dupKeys = StringUtils.splitPreserveAllTokens(duplicateChecking.getDupKey(), BaseConstants.COMMON_SPLIT);
 			for (String dupKey : dupKeys) {
 				dupKeyMap.put(key.toString(), dupKey);
